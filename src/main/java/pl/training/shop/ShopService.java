@@ -10,6 +10,8 @@ import pl.training.shop.payments.PaymentRequest;
 import pl.training.shop.payments.PaymentService;
 import pl.training.shop.products.Product;
 import pl.training.shop.products.ProductService;
+import pl.training.shop.users.User;
+import pl.training.shop.users.UserService;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class ShopService {
     private final OrderService orderService;
     private final PaymentService paymentService;
     private final ProductService productService;
+    private final UserService userService;
 
     public Product addProduct(Product product) {
         return productService.add(product);
@@ -35,6 +38,12 @@ public class ShopService {
 
     public Order placeOrder(Order order) {
         return orderService.add(order);
+    }
+
+    public User addUser(User user) { return userService.add(user); }
+    public User getUserById(String id) { return  userService.findById(id); }
+    public PagedResult<User> findUsersByLastName(String lastNameFragment, int pageSize, int pageNumber) {
+        return userService.findByLastName(lastNameFragment, pageSize, pageNumber);
     }
 
     public Payment payForOrder(long orderId) {

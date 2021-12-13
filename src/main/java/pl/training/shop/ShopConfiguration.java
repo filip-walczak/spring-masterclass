@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import pl.training.shop.orders.OrderService;
 import pl.training.shop.payments.PaymentService;
 import pl.training.shop.products.ProductService;
+import pl.training.shop.users.UserService;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -44,8 +45,8 @@ public class ShopConfiguration {
     }
 
     @Bean
-    public ShopService shopService(OrderService orderService, PaymentService paymentService, ProductService productService) {
-        return new ShopService(orderService, paymentService, productService);
+    public ShopService shopService(OrderService orderService, PaymentService paymentService, ProductService productService, UserService userService) {
+        return new ShopService(orderService, paymentService, productService, userService);
     }
 
     @Bean

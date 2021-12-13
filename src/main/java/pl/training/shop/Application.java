@@ -6,6 +6,7 @@ import pl.training.shop.orders.Order;
 import pl.training.shop.payments.LocalMoney;
 import pl.training.shop.products.Product;
 import pl.training.shop.products.ProductType;
+import pl.training.shop.users.User;
 
 import java.util.List;
 
@@ -25,6 +26,14 @@ public class Application {
             .type(ProductType.BOOK)
             .price(LocalMoney.of(200))
             .build();
+    private static final User USER_ONE = User.builder()
+            .firstName("Vladimír")
+            .lastName("Chvatil")
+            .build();
+    private static final User USER_TWO = User.builder()
+            .firstName("Mariusz")
+            .lastName("Chwaszczyński")
+            .build();
 
     public static void main(String[] args) {
         try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BASE_PACKAGE)) {
@@ -40,6 +49,12 @@ public class Application {
 
             log.info(shopService.getProductByName("Spring").toString());
             log.info(shopService.getProductByName("Spring").toString());
+
+
+            var user = shopService.addUser(USER_ONE);
+            shopService.addUser(USER_TWO);
+            log.info(shopService.getUserById(user.getId()).toString());
+            log.info(shopService.findUsersByLastName("Ch", 10, 0).toString());
         }
     }
 
